@@ -6,5 +6,8 @@ export default defineConfig({
    * @see https://windicss.org/features/attributify.html
    */
   attributify: true,
-  plugins: [require('windicss/plugin/forms')],
+  plugins: [
+    require('windicss/plugin/forms'),
+    require('@windicss/plugin-scrollbar'),
+  ],
 })
