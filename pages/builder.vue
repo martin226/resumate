@@ -12,7 +12,7 @@
           </NuxtLink>
         </div>
       </nav>
-      <div class="flex flex-1 items-center justify-center">
+      <div class="flex flex-1">
         <BuilderTemplate
           @template="(i) => (template = i)"
           @next="stage++"

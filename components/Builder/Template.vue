@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-8 text-center">
+  <div class="space-y-8 text-center m-auto">
     <h2 class="text-4xl">First, select a template.</h2>
     <div class="flex flex-row gap-8">
       <div
