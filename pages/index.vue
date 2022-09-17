@@ -18,12 +18,13 @@
           <div class="space-y-8">
             <h2 class="text-4xl font-bold">The world's best resume builder.</h2>
             <div>
-              <button
+              <NuxtLink
+                to="/builder"
                 class="bg-red-500 px-8 py-4 text-xl font-semibold text-white"
               >
                 Get started. 100% free forever.
-              </button>
-              <p class="italics mt-3 text-sm text-gray-500">
+              </NuxtLink>
+              <p class="italics mt-6 text-sm text-gray-500">
                 No credit card required.
               </p>
             </div>
