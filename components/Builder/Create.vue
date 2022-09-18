@@ -379,6 +379,39 @@
                 awards,
               }"
             />
+            <BuilderTemplateTwo
+              v-else-if="template == 1"
+              :data="{
+                informations,
+                educations,
+                experiences,
+                skills,
+                projects,
+                awards,
+              }"
+            /> 
+            <BuilderTemplateThree
+              v-else-if="template == 2"
+              :data="{
+                informations,
+                educations,
+                experiences,
+                skills,
+                projects,
+                awards,
+              }"
+            />  
+            <BuilderTemplateFour
+              v-else-if="template == 3"
+              :data="{
+                informations,
+                educations,
+                experiences,
+                skills,
+                projects,
+                awards,
+              }"
+            />   
           </section>
         </vue-html2pdf>
       </client-only>
@@ -393,7 +426,41 @@
           awards,
         }"
       />
-      <button @click="generatePDF">click</button>
+      <BuilderTemplateTwo
+        v-else-if="template == 1"
+        :data="{
+          informations,
+          educations,
+          experiences,
+          skills,
+          projects,
+          awards,
+        }"
+      /> 
+      <BuilderTemplateThree
+        v-else-if="template == 2"
+        :data="{
+          informations,
+          educations,
+          experiences,
+          skills,
+          projects,
+          awards,
+        }"
+      /> 
+      <BuilderTemplateFour
+        v-else-if="template == 3"
+        :data="{
+          informations,
+          educations,
+          experiences,
+          skills,
+          projects,
+          awards,
+        }"
+      />  
+
+      <button class="ml-2 border-solid border-black border-2 rounded" style="background-color: skyblue" @click="generatePDF">Download PDF</button>
     </div>
   </div>
 </template>
