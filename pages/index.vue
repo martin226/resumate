@@ -20,7 +20,7 @@
             <div>
               <NuxtLink
                 to="/builder"
-                class="bg-red-500 px-8 py-4 text-xl font-semibold text-white"
+                class="bg-blue-500 px-8 py-4 text-xl font-semibold text-white"
               >
                 Get started. 100% free forever.
               </NuxtLink>
