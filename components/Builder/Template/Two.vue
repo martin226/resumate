@@ -1,13 +1,13 @@
 <template>
   <div class="p-5">
-    <h1 class="text-4xl text-center">{{ data.informations.name }}</h1>
+    <h1 class="text-4xl">{{ data.informations.name }}</h1>
     <div class="h-full flex justify-around">
       <h3 class="center">{{ data.informations.email }}</h3>
       <h3 class="center">{{ data.informations.number }}</h3>
       <h3 class="center">{{ data.informations.location }}</h3>
       <h3 class="center">{{ data.informations.link }}</h3>
     </div>
-    <h2 class="font-bold">Education</h2>
+    <h2 class="font-bold text-center">Education</h2>
     <span
       class="list-disc ml-8"
       v-for="(edu, i) in data.educations"
@@ -23,7 +23,7 @@
         <br
       /></span>
     </span>
-    <h2 class="font-bold">Experience</h2>
+    <h2 class="font-bold text-center">Experience</h2>
     <ul
       class="list-disc ml-8"
       v-for="(exp, i) in data.experiences"
@@ -42,7 +42,7 @@
         {{ res }}
       </li>
     </ul>
-    <h2 class="font-bold">Skills</h2>
+    <h2 class="font-bold text-center">Skills</h2>
     <ul
       class="list-disc ml-8"
       v-for="(skill, i) in data.skills"
@@ -58,13 +58,13 @@
         {{ res }}
       </li>
     </ul>
-    <h2 class="font-bold">Projects</h2>
+    <h2 class="font-bold text-center">Projects</h2>
     <span class="ml-8" v-for="(proj, i) in data.projects" :key="`proj-${i}`">
       <u>{{ proj.name }}</u> - {{ proj.tools.join(', ') }} <br />
       <span class="ml-8">{{ proj.link }}</span>
       <li class="ml-12">{{ proj.description }}</li>
     </span>
-    <h2 class="font-bold">Awards</h2>
+    <h2 class="font-bold text-center">Awards</h2>
     <ul
       class="list-disc ml-8"
       v-for="(award, i) in data.awards"
@@ -81,7 +81,7 @@
 
 <script>
 export default {
-  name: 'BuilderTemplateOne',
+  name: 'BuilderTemplateTwo',
   props: {
     data: {
       type: Object,

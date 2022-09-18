@@ -2,26 +2,30 @@
   <div class="space-y-8 text-center m-auto">
     <h2 class="text-4xl">First, select a template.</h2>
     <div class="flex flex-row gap-8">
-      <div
+      <img
+        src="@/assets/resume1.png"
         class="w-48 h-64 border-2 border-blue-500 cursor-pointer"
         ref="template-0"
         @click="selectTemplate(0)"
-      ></div>
-      <div
+      />
+      <img
+        src="@/assets/resume2.png"
         class="w-48 h-64 border-2 border-black cursor-pointer"
         ref="template-1"
         @click="selectTemplate(1)"
-      ></div>
-      <div
+      />
+      <img
+        src="@/assets/resume3.png"
         class="w-48 h-64 border-2 border-black cursor-pointer"
         ref="template-2"
         @click="selectTemplate(2)"
-      ></div>
-      <div
+      />
+      <img
+        src="@/assets/resume4.png"
         class="w-48 h-64 border-2 border-black cursor-pointer"
         ref="template-3"
         @click="selectTemplate(3)"
-      ></div>
+      />
     </div>
     <button
       class="bg-blue-500 px-8 py-4 text-xl font-semibold text-white"
