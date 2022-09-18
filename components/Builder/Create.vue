@@ -7,7 +7,8 @@
       <div class="space-y-4 mt-4">
         <label class="block">
           <span class="text-gray-700">Full name</span>
-          <input type="text" class="mt-1 block w-full" placeholder="John Doe" />
+          <input type="text" class="mt-1 block w-full" placeholder="John Doe" 
+          v-model="informations.name" />
         </label>
         <label class="block">
           <span class="text-gray-700">Email</span>
@@ -15,6 +16,7 @@
             type="text"
             class="mt-1 block w-full"
             placeholder="john.doe@email.com"
+            v-model="informations.email"
           />
         </label>
         <label class="block">
@@ -23,6 +25,7 @@
             type="text"
             class="mt-1 block w-full"
             placeholder="(123) 456-7890"
+            v-model="informations.number"
           />
         </label>
         <label class="block">
@@ -31,6 +34,7 @@
             type="text"
             class="mt-1 block w-full"
             placeholder="Waterloo, ON"
+            v-model="informations.location"
           />
         </label>
         <label class="block">
@@ -39,6 +43,7 @@
             type="text"
             class="mt-1 block w-full"
             placeholder="mywebsite.com"
+            v-model="informations.block"
           />
         </label>
       </div>
@@ -366,6 +371,7 @@
             <BuilderTemplateOne
               v-if="template == 0"
               :data="{
+                informations,
                 educations,
                 experiences,
                 skills,
@@ -379,6 +385,7 @@
       <BuilderTemplateOne
         v-if="template == 0"
         :data="{
+          informations,
           educations,
           experiences,
           skills,
@@ -403,6 +410,15 @@ export default {
   },
   data() {
     return {
+      informations: [
+        {
+          name: '',
+          email: '',
+          number: '',
+          link: '',
+          location: ''
+        }
+      ],
       educations: [
         {
           school: '',
@@ -448,6 +464,15 @@ export default {
     }
   },
   methods: {
+    newInfo() {
+      this.informations.push({
+        name:'',
+        email: '',
+        number: '',
+        link: '',
+        location: ''
+      })
+    },
     newEdu() {
       this.educations.push({
         school: '',

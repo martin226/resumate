@@ -1,11 +1,11 @@
 <template>
   <div class="p-5">
-    <h1 class="text-4xl text-center">John Doe</h1>
+    <h1 class="text-4xl text-center">{{ data['informations']['name'] }}</h1>
     <div class="h-full flex justify-around">
-      <h3 class="center">Email Address</h3>
-      <h3 class="center">Phone Number</h3>
-      <h3 class="center">Portfolio</h3>
-      <h3 class="center">Location</h3>
+      <h3 class="center">{{ data['informations']['email'] }}</h3>
+      <h3 class="center">{{ data['informations']['number'] }}</h3>
+      <h3 class="center">{{ data['informations']['link'] }}</h3>
+      <h3 class="center">{{ data['informations']['location'] }}</h3>
     </div>
     <h2 class="font-bold">Education</h2>
       <span class="list-disc ml-8" v-for="edu in data['educations']">
