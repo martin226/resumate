@@ -1,5 +1,4 @@
 <template>
-  <div>
   <div class="grid grid-cols-6 w-full px-12 mt-16">
     <div
       class="col-span-2 flex flex-col overflow-y-scroll h-screen scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-red-500 px-4"
@@ -152,6 +151,11 @@
                 class="mt-1 block w-full"
                 placeholder="Did some stuff"
                 v-model="exp.responsibilities[j]"
+                @keyup="
+                  (event) => {
+                    classifyPoint(event, exp.responsibilities[j])
+                  }
+                "
               />
               <button
                 v-if="j == exp.responsibilities.length - 1"
@@ -168,6 +172,7 @@
               type="text"
               class="mt-1 block w-full"
               placeholder="Apr 2022"
+              v-model="exp.startDate"
             />
           </label>
           <label class="block">
@@ -176,6 +181,7 @@
               type="text"
               class="mt-1 block w-full"
               placeholder="Dec 2022"
+              v-model="exp.endDate"
             />
           </label>
         </div>
@@ -339,41 +345,64 @@
         Add Award
       </button>
     </div>
-    <div class="col-span-4"></div>
-  </div>
-  <div class="rounded border-black border-2 float-right position-absolute">
-     <vue-html2pdf
-        :show-layout="false"
-        :float-layout="false"
-        :enable-download="true"
-        :preview-modal="true"
-        :paginate-elements-by-height="1400"
-        filename="hee hee"
-        :pdf-quality="2"
-        :manual-pagination="false"
-        pdf-format="a4"
-        pdf-orientation="landscape"
-        pdf-content-width="800px"
- 
-        @progress="onProgress($event)"
-        @hasStartedGeneration="hasStartedGeneration()"
-        @hasGenerated="hasGenerated($event)"
-        ref="html2Pdf"
-    >
-        <section slot="pdf-content">
-            <p>Hi</p>
-        </section>
-    </vue-html2pdf>
+    <div class="col-span-4">
+      <client-only>
+        <vue-html2pdf
+          :show-layout="false"
+          :float-layout="true"
+          :enable-download="true"
+          :preview-modal="true"
+          :paginate-elements-by-height="1400"
+          filename="resume"
+          :pdf-quality="2"
+          :manual-pagination="false"
+          pdf-format="a4"
+          :pdf-margin="10"
+          pdf-orientation="portrait"
+          pdf-content-width="800px"
+          ref="html2Pdf"
+        >
+          <section slot="pdf-content">
+            <BuilderTemplateOne
+              v-if="template == 0"
+              :data="{
+                educations,
+                experiences,
+                skills,
+                projects,
+                awards,
+              }"
+            />
+          </section>
+        </vue-html2pdf>
+      </client-only>
+      <BuilderTemplateOne
+        v-if="template == 0"
+        :data="{
+          educations,
+          experiences,
+          skills,
+          projects,
+          awards,
+        }"
+      />
+      <button @click="generatePDF">click</button>
     </div>
-   </div>
+  </div>
 </template>
 
 <script>
+const debounce = require('lodash.debounce')
 export default {
   name: 'BuilderCreate',
+  props: {
+    template: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
-      educationCount: 1,
       educations: [
         {
           school: '',
@@ -461,6 +490,103 @@ export default {
         summary: '',
       })
     },
+    generatePDF() {
+      this.$refs.html2Pdf.generatePdf()
+    },
+    classifyPoint: debounce(async function (event, point) {
+      if (!point) return
+      const response = await this.$axios.post(
+        'https://api.cohere.ai/classify',
+        {
+          model: 'large',
+          inputs: [point],
+          examples: [
+            {
+              text: 'Developed suggestions engine for store',
+              label: 'Bad',
+            },
+            {
+              text: 'Used Google Cloud Recommendations Engine to build a suggestions system for over 10M monthly users of store, boosting sales by 34%',
+              label: 'Good',
+            },
+            {
+              text: 'Worked on backend services',
+              label: 'Bad',
+            },
+            {
+              text: 'Developed RESTful API using Flask to reduce fetching time by 70%',
+              label: 'Good',
+            },
+            {
+              text: 'Updated website design as needed',
+              label: 'Bad',
+            },
+            {
+              text: 'Trained employees on using internal tools',
+              label: 'Bad',
+            },
+            {
+              text: 'Used Github for collaboration',
+              label: 'Bad',
+            },
+            {
+              text: 'Developed mobile application for school, used by over 90% of the population to access important announcements',
+              label: 'Good',
+            },
+            {
+              text: 'Created a transaction system with Stripe, boosting sales by 14% and raising overall customer convenience',
+              label: 'Good',
+            },
+            {
+              text: 'Implemented machine learning algorithms to detect and remove spam comments with 99% accuracy',
+              label: 'Good',
+            },
+            {
+              text: 'Responsible for receiving calls from customers',
+              label: 'Bad',
+            },
+            {
+              text: 'Built a chatbot to respond to customer inquiries, increasing 5 star reviews by over 43%',
+              label: 'Good',
+            },
+            {
+              text: 'Designed an acronym translator for customer service representatives, facilitating improved responses and increasing overall customer satisfaction',
+              label: 'Good',
+            },
+            {
+              text: 'Responded to emails quick',
+              label: 'Bad',
+            },
+            {
+              text: 'Created a QR code system for users to use',
+              label: 'Bad',
+            },
+            {
+              text: 'Analyzed over $45M of transactions to find patterns in consumer spending, to align marketing efforts towards customer interest',
+              label: 'Good',
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: 'BEARER IpjO25iPMrxIq5nuSiBOqju8eWTJ06X5KDibjCk6',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      event.target.classList.add('focus:border-none')
+      if (response.data.classifications[0].prediction === 'Good') {
+        event.target.classList.add('border-green-500')
+        event.target.classList.add('focus:outline-green-500')
+        event.target.classList.remove('border-red-500')
+        event.target.classList.remove('focus:outline-red-500')
+      } else {
+        event.target.classList.add('border-red-500')
+        event.target.classList.add('focus:outline-red-500')
+        event.target.classList.remove('border-green-500')
+        event.target.classList.remove('focus:outline-green-500')
+      }
+    }, 1500),
   },
 }
 </script>
