@@ -7,7 +7,7 @@
         >
           <NuxtLink to="/" class="flex items-center">
             <span class="self-center whitespace-nowrap text-xl font-semibold"
-              >Resume</span
+              >Resumate</span
             >
           </NuxtLink>
         </div>

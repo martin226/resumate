@@ -7,7 +7,7 @@
         >
           <NuxtLink to="/" class="flex items-center">
             <span class="self-center whitespace-nowrap text-xl font-semibold"
-              >Resume</span
+              >Resumate</span
             >
           </NuxtLink>
         </div>
@@ -40,8 +40,8 @@
             Like Grammarly, but for <span class="underline">resumes</span>.
           </h2>
           <p class="text-gray-400 sm:text-xl">
-            Here at Resume, we help you achieve your career goals by making sure
-            you have the best resume possible.
+            Here at Resumate, we help you achieve your career goals by making
+            sure you have the best resume possible.
           </p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-16">
